@@ -1,0 +1,57 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+  <button (click)="drawer.toggle()" mat-icon-button>
+    <mat-icon> menu</mat-icon>
+  </button>
+  <span> {{ title }}</span>
+  <span class="example-spacer"></span>
+
+  <mat-icon
+    matBadge="1"
+    matBadgeColor="warn"
+    [matBadgeHidden]="hidden"
+    (click)="toggleBadgeVisibility()"
+    matBadgeSize="small"
+    matBadgeOverlap="false"
+    >notifications</mat-icon
+  >
+  <!----------------------------dahshboard------------------------------------------>
+</mat-toolbar>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" position="start">
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-button><mat-icon>dashboard</mat-icon>Dashboard</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button [routerLink]="'/dashboard/productList'">
+          <mat-icon>home</mat-icon>Display products
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button [routerLink]="'/dashboard/product'">
+          <mat-icon>work</mat-icon>Add Product
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><mat-icon>settings</mat-icon>Setings</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><mat-icon>help</mat-icon>Help</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><mat-icon>analytics</mat-icon>Analytics</button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button [routerLink]="'/login'">
+          <mat-icon>power_settings_new</mat-icon>Quitter
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div style="text-align: center; min-height: 600px">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,49 @@
+<form [formGroup]="productForm" (ngSubmit)="saveForm()">
+  <mat-card>
+    <mat-card-title>{{ nomFormulaire }}</mat-card-title>
+    <mat-card-content>
+      <mat-form-field class="mat-50">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="mat-50">
+        <mat-label>Price</mat-label>
+        <input formControlName="price" matInput />
+      </mat-form-field>
+      <mat-form-field class="mat-50">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput></textarea>
+      </mat-form-field>
+      <mat-form-field class="mat-50">
+        <mat-label>Category</mat-label>
+        <mat-select>
+          <mat-option value="" *ngFor="let item of category">{{
+            item
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button color="primary" mat-button (click)="filePicker.click()">
+        <mat-icon>attachment</mat-icon>
+      </button>
+      <input
+        style="display: none"
+        type="file"
+        #filePicker
+        (change)="onImagePick($event)"
+      />
+      <div class="image-preview" *ngIf="imagePreview">
+        <img [src]="imagePreview" alt="" />
+      </div>
+      <button
+        mat-button
+        mat-raised-button
+        color="primary"
+        (click)="resetForm()"
+      >
+        Save
+      </button>
+    </mat-card-content>
+  </mat-card>
+</form>
