@@ -34,9 +34,7 @@ import { BaseAppDtoResponse } from 'src/app/shared/dtos/responses/shared/base.dt
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  Roles: any = ['Admin', 'Author', 'Reader'];
   signupForm!: FormGroup;
-
   constructor(
     private auth: AuthService,
     private fb: FormBuilder,
@@ -53,7 +51,7 @@ export class SignupComponent implements OnInit {
       password: this.fb.control('', Validators.required),
       password_confirmation: this.fb.control('', Validators.required),
       phone: this.fb.control('', Validators.required),
-      roles: this.fb.control('', Validators.required),
+      
     });
   }
 

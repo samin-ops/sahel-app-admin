@@ -10,7 +10,6 @@ export class User {
     this.email = param.email;
     this.roles = param.roles;
   }
-
   id: string;
   username: string;
   firstName: string;
@@ -19,7 +18,7 @@ export class User {
   password: string;
   password_confirmation: string;
   email: string;
-  roles: string[];
+  roles: Role;
   address!: string;
   address2!: string;
   country!: string;
@@ -40,3 +39,15 @@ export class UserDetail {
   state!: string;
   zip!: number;
 }
+
+export class Role {
+  id: number;
+  name: string;
+  description: string
+  constructor( param: any = {} ){
+    this.id = param.id;
+    this.name = param.name;
+    this.description = param.description
+  }
+}
+

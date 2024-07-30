@@ -93,11 +93,11 @@ export class AuthService {
   }
 
   isAdminSync(): boolean {
-    return this.user.getValue().roles.indexOf('admin') !== -1;
+    return this.user.getValue().roles.name.indexOf('admin') !== -1;
   }
 
   getUser(): Observable<User> {
-    return this.user.asObservable(); // this.user is undefined
+    return this.user.asObservable(); 
   }
 
   isAdminAsync(): Observable<boolean> {
@@ -106,10 +106,8 @@ export class AuthService {
         if (user == null) {
           return false;
         }
-        const rolesIntersection = user.roles.filter(
-          (role) => -1 !== ['admin'].indexOf(role)
-        );
-        return rolesIntersection.length >= 1;
+        const rolesIntersection = user.roles.name.includes('Admin') //user.roles.name.filter((r:any) => -1 !== ['admin'].indexOf(r));
+        return rolesIntersection;
       })
     );
   }

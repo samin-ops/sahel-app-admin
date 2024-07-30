@@ -10,9 +10,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
-  isLoggedIn!: true;
-  message!: '';
+export class HeaderComponent implements OnInit, OnDestroy {
+  private cart: Observable<ShoppingCart>;
+    private message: string;
+    private cartItemsLength: number;
+    private isLoggedIn = false;
+    private subscriptions: Subscription[] = [];
+    private className: string;
 
   constructor() {}
 
