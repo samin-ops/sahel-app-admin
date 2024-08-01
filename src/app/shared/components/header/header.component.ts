@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notification.service';
+import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
+import { ShoppingCart } from '../../models/shopping-cart.model';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +23,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private subscriptions: Subscription[] = [];
     private className: string;
 
-  constructor() {}
+  constructor(private usersService: AuthService, private cartService: ShoppingCartServiceService,
+    private notificationService: NotificationService) {}
+
+    ngOnInit(){
+      this.cart = this.cartService.getCart();
+
+    }
+
+    ngOnDestroy() {
+
+    }
 
   logout() {}
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 let CREATED = false;
 @Injectable({
   providedIn: 'root',
@@ -7,7 +6,6 @@ let CREATED = false;
 export class LocalstorageServicesService {
   constructor() {
     console.log('Jwt Service constructed');
-
     if (CREATED) {
       alert('Two instances of the same LocalStorageService');
       return;
