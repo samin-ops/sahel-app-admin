@@ -3,10 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, retry, tap } from 'rxjs';
 import { ErrorResult } from '../dtos/local/base';
 import { LoginRequestDto } from '../dtos/requests/login.dto';
-import {
-  buildError,
-  buildErrorObservable,
-} from '../dtos/responses/shared/utils/net.utils';
+import { buildError, buildErrorObservable } from './utils/net.utils';
 import { LoginDtoResponse } from '../dtos/responses/users/auth.dto';
 import { User } from '../models/user';
 import { LocalstorageServicesService } from './localstorage-services.service';
@@ -97,7 +94,7 @@ export class AuthService {
   }
 
   getUser(): Observable<User> {
-    return this.user.asObservable(); 
+    return this.user.asObservable();
   }
 
   isAdminAsync(): Observable<boolean> {
@@ -106,7 +103,7 @@ export class AuthService {
         if (user == null) {
           return false;
         }
-        const rolesIntersection = user.roles.name.includes('Admin') //user.roles.name.filter((r:any) => -1 !== ['admin'].indexOf(r));
+        const rolesIntersection = user.roles.name.includes('Admin'); //user.roles.name.filter((r:any) => -1 !== ['admin'].indexOf(r));
         return rolesIntersection;
       })
     );

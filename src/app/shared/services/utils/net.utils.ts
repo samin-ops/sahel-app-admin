@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { ErrorResult } from '../../../local/base';
+import { ErrorResult } from '../../dtos/local/base';
 
 export function buildErrorObservable(
   err: HttpErrorResponse | string | String
