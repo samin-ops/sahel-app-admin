@@ -16,24 +16,45 @@ import { ShoppingCart } from '../../models/shopping-cart.model';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private cart: Observable<ShoppingCart>;
-    private message: string;
-    private cartItemsLength: number;
-    private isLoggedIn = false;
-    private subscriptions: Subscription[] = [];
-    private className: string;
+  cart: Observable<ShoppingCart>;
+  message!: string;
+  cartItemsLength!: number;
+  isLoggedIn = false;
+  subscriptions!: Subscription[];
+  className!: string;
 
-  constructor(private usersService: AuthService, private cartService: ShoppingCartServiceService,
-    private notificationService: NotificationService) {}
+  constructor(
+    private usersService: AuthService,
+    private cartService: ShoppingCartServiceService,
+    private notificationService: NotificationService
+  ) {
+    this.cart = this.cartService.getCart();
+    this.subscriptions.push(
+      this.usersService.isLoggedInAsync().subscribe((isLoggedIn) => {
+        this.isLoggedIn = isLoggedIn;
+        // this.isLoggedIn = !!(user && user.username && user.token);
+      })
+    );
+    this.cart.subscribe((cart) => {
+      this.cartItemsLength = cart.cartItems.length;
+    });
+    this.notificationService.getNotifications().subscribe((notification) => {
+      if (notification == null) {
+        return;
+      }
+      this.className =
+        notification.type === 'success'
+          ? 'alert alert-success'
+          : 'alert alert-danger';
+      this.message = notification.message;
+    });
+  }
 
-    ngOnInit(){
-      this.cart = this.cartService.getCart();
+  ngOnInit() {}
 
-    }
+  ngOnDestroy() {}
 
-    ngOnDestroy() {
-
-    }
-
-  logout() {}
+  logout() {
+    this.usersService.logout();
+  }
 }

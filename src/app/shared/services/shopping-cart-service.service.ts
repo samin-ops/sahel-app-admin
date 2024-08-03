@@ -19,7 +19,6 @@ export class ShoppingCartServiceService {
 
   private subscribers: any;
   private readonly cartKey = 'app_cart';
-
   cartModel!: ShoppingCart;
   private cartBehaviorSubject!: BehaviorSubject<ShoppingCart>;
 
