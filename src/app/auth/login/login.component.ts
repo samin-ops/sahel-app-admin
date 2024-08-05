@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -8,11 +8,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
+
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { User } from 'src/app/shared/models/user';
-import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
@@ -24,8 +22,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule,
-    MatInputModule,
+
     RouterModule,
   ],
   templateUrl: './login.component.html',
@@ -64,6 +61,7 @@ export class LoginComponent implements OnInit {
       this.usersService.login(data).subscribe({
         next: (result) => {
           console.log(result);
+          this.router.navigateByUrl('/home');
         },
         error: (err) => {
           console.log(err);

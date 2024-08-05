@@ -8,9 +8,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -25,9 +22,6 @@ import { BaseAppDtoResponse } from 'src/app/shared/dtos/responses/shared/base.dt
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatSelectModule,
     RouterModule,
   ],
   templateUrl: './signup.component.html',
@@ -51,7 +45,6 @@ export class SignupComponent implements OnInit {
       password: this.fb.control('', Validators.required),
       password_confirmation: this.fb.control('', Validators.required),
       phone: this.fb.control('', Validators.required),
-      
     });
   }
 

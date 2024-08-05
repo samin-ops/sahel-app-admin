@@ -7,7 +7,6 @@ import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
 import { ShoppingCart } from '../../models/shopping-cart.model';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-header',

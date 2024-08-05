@@ -9,7 +9,10 @@ export function buildErrorObservable(
     return of(buildError(err));
   } else {
     debugger;
-    return throwError(() => new Error());
+    return throwError(() => {
+      const err: any = new Error(`this is an error`);
+      return err;
+    });
   }
 }
 
@@ -27,5 +30,5 @@ export function buildError(
   } else {
     debugger;
   }
-  return new ErrorResult(); //
+  return new ErrorResult();
 }

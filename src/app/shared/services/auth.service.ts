@@ -105,8 +105,10 @@ export class AuthService {
         if (user == null) {
           return false;
         }
-        const rolesIntersection = user.roles.name.includes('Admin'); //user.roles.name.filter((r:any) => -1 !== ['admin'].indexOf(r));
+        const rolesIntersection = user.roles.name.includes('admin');
         return rolesIntersection;
+        //const rolesIntersection = user.roles.name.((role) => -1 !== ['admin'].indexOf(role));
+        //return rolesIntersection.length >= 1;
       })
     );
   }

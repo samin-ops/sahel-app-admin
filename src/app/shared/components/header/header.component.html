@@ -20,13 +20,13 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="javascript:;;" [routerLink]="['/']"
+        <a class="nav-link" href="javascript:;;" [routerLink]="'/'"
           >Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="jaascript:;;" [routerLink]="['/products']"
+        <a class="nav-link" href="jaascript:;;" [routerLink]="'/product/list'"
           >Products</a
         >
       </li>
@@ -39,7 +39,7 @@
           <a
             class="nav-link"
             href="javascript:;;"
-            [routerLink]="['/products/favourite-products']"
+            [routerLink]="'/product/favourite-products'"
           >
             <i class="fa fa-heart">
               <span class="mt-2"> </span>
@@ -49,7 +49,7 @@
       </li>
       <li class="nav-item">
         <div>
-          <a class="nav-link" href="javascript:;;" [routerLink]="['/cart']">
+          <a class="nav-link" href="javascript:;;" [routerLink]="'/cart'">
             <i class="fa fa-shopping-cart">
               <span class="mt-2"> {{ cartItemsLength }}</span>
             </i>
@@ -63,17 +63,17 @@
         </a>
       </li>
       <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link" [routerLink]="['/auth/profile']">
+        <a class="nav-link" [routerLink]="'/auth/profile'">
           <i class="fa fa-user"></i> My Account</a
         >
       </li>
       <li class="nav-item" *ngIf="!isLoggedIn">
-        <a class="nav-link" [routerLink]="['/auth/login']">
+        <a class="nav-link" [routerLink]="'/auth/login'">
           <i class="fa fa-user"></i>Login</a
         >
       </li>
       <li class="nav-item" *ngIf="!isLoggedIn">
-        <a class="nav-link" [routerLink]="['/auth/register']">
+        <a class="nav-link" [routerLink]="'/auth/register'">
           <i class="fa fa-sign-in"></i>Register</a
         >
       </li>
