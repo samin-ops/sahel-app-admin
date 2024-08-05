@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, retry, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, retry } from 'rxjs';
 import { ErrorResult } from '../dtos/local/base';
 import { LoginRequestDto } from '../dtos/requests/login.dto';
 import { buildError, buildErrorObservable } from './utils/net.utils';
@@ -15,6 +15,8 @@ const httpOptions = {
   }),
 };
 
+let CREATED = false;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,9 +24,9 @@ export class AuthService {
   readonly api = 'http://localhost:3000/api/v1/user';
 
   isLoggedIn: boolean | undefined;
-  cachedUser: User | undefined;
-  user!: BehaviorSubject<User>;
+  private cachedUser!: User;
   USER_KEY = 'auth_user';
+  user = new BehaviorSubject<User>(this.cachedUser);
 
   constructor(
     private http: HttpClient,

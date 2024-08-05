@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../services/notification.service';
 import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
 import { ShoppingCart } from '../../models/shopping-cart.model';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   message!: string;
   cartItemsLength!: number;
   isLoggedIn = false;
-  subscriptions!: Subscription[];
+  private subscriptions: Subscription[] = [];
   className!: string;
 
   constructor(

@@ -42,9 +42,7 @@
             [routerLink]="['/products/favourite-products']"
           >
             <i class="fa fa-heart">
-              <span class="mt-2">
-                {{ cartService.getFavoritedProductsCount() }}</span
-              >
+              <span class="mt-2"> </span>
             </i>
           </a>
         </div>
@@ -89,10 +87,8 @@
   <!-- Collapsible content -->
 </nav>
 
-<h5 *ngIf="(cart | async).cartItems.length > 0">
-  <span *ngFor="let item of (cart | async).cartItems">
-    Id: {{ item.id }} Qty: {{ item.quantity }}
-  </span>
+<h5>
+  <span> </span>
 </h5>
 
-<div *ngIf="message" [className]="className">{{ message }}</div>
+<div></div>
