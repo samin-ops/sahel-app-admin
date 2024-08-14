@@ -1,6 +1,6 @@
 export class BaseAppDtoResponse {
-  success!: boolean;
-  full_messages!: string[];
+  success: boolean;
+  full_messages: string[];
 }
 
 export class ErrorAppDtoResponse extends BaseAppDtoResponse {

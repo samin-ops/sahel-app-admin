@@ -1,7 +1,6 @@
-import { Product } from "./product";
-
-export interface WishList {
-    name: string;
-    products: Product[];
-    createdAt: Date;
-  }
+import { Product } from './product';
+export class WishList {
+  name: string;
+  products: Product[];
+  createdAt: Date;
+}

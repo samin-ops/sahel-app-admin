@@ -1,6 +1,7 @@
-export interface Category {
-    id: string;
-    name: string;
-    slug: string;
-    descritpion: string;
-  }
+export class Category {
+  id: string;
+  name: string;
+  slug: string;
+  image: string;
+  descritpion: string;
+}

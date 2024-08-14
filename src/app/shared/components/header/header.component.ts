@@ -17,15 +17,15 @@ import { ShoppingCart } from '../../models/shopping-cart.model';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   cart: Observable<ShoppingCart>;
-  message!: string;
-  cartItemsLength!: number;
+  message: string;
+  cartItemsLength: number;
   isLoggedIn = false;
-  private subscriptions: Subscription[] = [];
-  className!: string;
+  subscriptions: Subscription[];
+  className: string;
 
   constructor(
     private usersService: AuthService,
-    private cartService: ShoppingCartServiceService,
+    public cartService: ShoppingCartServiceService,
     private notificationService: NotificationService
   ) {
     this.cart = this.cartService.getCart();
@@ -43,18 +43,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
         return;
       }
       this.className =
-        notification.type === 'success'
+        notification === 'success'
           ? 'alert alert-success'
           : 'alert alert-danger';
-      this.message = notification.message;
+      this.message = 'message';
     });
   }
 
   ngOnInit() {}
 
-  ngOnDestroy() {}
-
   logout() {
     this.usersService.logout();
+  }
+
+  ngOnDestroy() {
+    // TODO: Unsubscribe
   }
 }

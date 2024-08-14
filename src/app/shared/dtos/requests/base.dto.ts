@@ -1,4 +1,4 @@
 export class PaginationRequestDto {
-  page!: number;
-  pageSize!: number;
+  page: number;
+  pageSize: number;
 }

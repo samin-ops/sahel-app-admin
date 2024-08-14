@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app/app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideQuillConfig } from 'ngx-quill/config';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -13,5 +14,11 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserAnimationsModule),
     importProvidersFrom(HttpClientModule),
     provideAnimations(), // required animations providers
+    provideQuillConfig({
+      modules: {
+        syntax: true,
+        toolbar: [],
+      },
+    }),
   ],
 });

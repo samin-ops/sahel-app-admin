@@ -11,15 +11,13 @@ let CREATED = false;
   providedIn: 'root',
 })
 export class ShoppingCartServiceService {
-  // BASE_URL = `${environment.urls.cart}`;
-
   readonly api = 'http://localhost:3000/api/v1/order';
 
   //cartBehaviorSubject!: BehaviorSubject<ShoppingCart>;
 
   private subscribers: any;
-  private readonly cartKey = 'app_cart';
-  cartModel!: ShoppingCart;
+  readonly cartKey = 'app_cart';
+  cartModel: ShoppingCart;
   private cartBehaviorSubject!: BehaviorSubject<ShoppingCart>;
 
   constructor(
@@ -42,9 +40,8 @@ export class ShoppingCartServiceService {
     if (!this.cartModel) {
       this.cartModel = new ShoppingCart();
     } else {
-      // populate the isInCart flag which is not stored but it is required and used by other functions in this app
       this.cartModel.cartItems.forEach((ci) => {
-        ci.id = String(ci.id); // we have to do this because somehow the id is stored as an integer
+        ci.id;
         ci.isInCart = true;
       });
     }
@@ -53,22 +50,13 @@ export class ShoppingCartServiceService {
   }
 
   getCart(): Observable<ShoppingCart> {
-    // return this.http.get(this.BASE_URL).pipe(catchError(this.formatErrors));
     return this.cartBehaviorSubject.asObservable();
   }
-
-  // updateCart(body: Object = {}): Observable<any> {
-  //   alert('updateCart');
-  //   return this.http
-  //     .put(this.BASE_URL, JSON.stringify(body))
-  //     .pipe(catchError(this.formatErrors));
-  // }
 
   addToCart(product: Product, quantity: number): Product {
     if (this.cartModel == null) {
       this.cartModel = this.getCartFromStorage();
     }
-
     let item = this.cartModel.cartItems.find((pr) => pr.id === product.id);
     if (item === undefined) {
       item = new Product();
@@ -79,7 +67,6 @@ export class ShoppingCartServiceService {
       item.quantity = 0;
       item.isInCart = true;
     }
-
     this.cartModel.cartItems.push(item);
     item.quantity += quantity;
     this.commitCartTransaction();
@@ -100,11 +87,6 @@ export class ShoppingCartServiceService {
   }
 
   updateCartLocal(cartState: Object = {}) {}
-
-  // deleteCart(): Observable<any> {
-  //   alert('delete Cart');
-  //   return this.http.delete(this.BASE_URL).pipe(catchError(this.formatErrors));
-  // }
 
   checkout(): Observable<any> {
     const body = this.getCartFromStorage();

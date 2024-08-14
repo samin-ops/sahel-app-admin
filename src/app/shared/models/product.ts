@@ -16,7 +16,7 @@ export class Product {
     this.comments = params.comments;
   }
 
-  id: string;
+  id: number;
   name: string;
   slug: string;
   //  productCategory: string;
@@ -31,5 +31,5 @@ export class Product {
   publish_on!: string;
   categories?: Category[];
   tags?: Tag[];
-  comments?: Comment[];
+  comments: Comment[];
 }

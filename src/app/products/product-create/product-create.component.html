@@ -1,1 +1,63 @@
-<p>product-create works!</p>
+<div class="container">
+  <h1 class="text-center">Ajouter un produit</h1>
+  <form class="row g-3" [formGroup]="productForm" (submit)="submitForm()">
+    <div class="col-md-6">
+      <label class="form-label" for="name">Nom du produit</label>
+      <input
+        class="form-control"
+        placeholder="Entrer le nom du produit"
+        type="text"
+        name="name"
+        id="name"
+        formControlName="name"
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" for="description">Description</label>
+      <textarea
+        class="form-control"
+        type="description"
+        name="description"
+        id="description"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label" for="price">Prix</label>
+      <input
+        class="form-control"
+        type="number"
+        name="price"
+        id="price"
+        placeholder="1"
+        step="1"
+        formControlName="price"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label" for="stock">Stock</label>
+      <input
+        class="form-control"
+        type="number"
+        name="stock"
+        id="stock"
+        placeholder="1"
+        step="1"
+        formControlName="stock"
+      />
+    </div>
+    <input
+      id="p_files"
+      name="p_files"
+      type="file"
+      (change)="addFiles($event)"
+      placeholder="Product Images"
+      multiple
+    />
+    <hr class="mb-3" />
+    <div class="col-md-12">
+      <button class="btn btn-primary" type="submit">Envoyer</button>
+    </div>
+  </form>
+</div>

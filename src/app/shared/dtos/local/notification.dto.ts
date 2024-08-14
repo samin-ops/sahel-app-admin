@@ -1,8 +1,8 @@
 export class NotificationsDto {
-  constructor(public type: string, public message: string) {}
+  constructor(type: string, message: string) {}
 }
 
 export class NotificationTypes {
-  public static SUCCESS_TYPE = 'success';
-  public static ERROR_TYPE = 'error';
+  static SUCCESS_TYPE = 'success';
+  static ERROR_TYPE = 'error';
 }

@@ -29,25 +29,19 @@ export class User {
 
 export class UserDetail {
   $key!: string;
-  firstName!: string;
-  lastName!: string;
-  userName!: string;
-  emailId!: string;
-  address1!: string;
-  address2!: string;
-  country!: string;
-  state!: string;
-  zip!: number;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  emailId: string;
+  address1: string;
+  address2: string;
+  country: string;
+  state: string;
+  zip: number;
 }
 
 export class Role {
   id: number;
   name: string;
-  description: string
-  constructor( param: any = {} ){
-    this.id = param.id;
-    this.name = param.name;
-    this.description = param.description
-  }
+  description: string;
 }
-

@@ -15,7 +15,7 @@ import { Product } from '../models/product';
 import { ShoppingCart } from '../models/shopping-cart.model';
 import { NotificationService } from './notification.service';
 import { ShoppingCartServiceService } from './shopping-cart-service.service';
-import { buildErrorObservable } from './utils/net.utils';
+import { buildErrorObservable } from '../utils/net.utils';
 
 let CREATED = false;
 
@@ -29,14 +29,13 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class ProductService {
-  private productList!: Product[];
-  private products!: ProductListResponseDto;
+  private productList: Product[];
+  products: ProductListResponseDto;
   readonly api = 'http://localhost:3000/api/v1/user';
 
-  cartSnapshot!: ShoppingCart;
-  productsBehaviourSubject = new BehaviorSubject<ProductListResponseDto>(
-    this.products
-  );
+  cartSnapshot: ShoppingCart;
+  productsBehaviourSubject: BehaviorSubject<ProductListResponseDto>;
+
   private lastUpdatedApiResponseForAll: number = 0;
   private lastUpdatedApiResponseForEach: Object[] = [];
 
@@ -186,7 +185,7 @@ export class ProductService {
         retry(5),
         map((res) => {
           if (res.success) {
-            const at = this.products.products.find((t) => t.id === res.id);
+            //const at = this.products.products.find((t) => t.id == res.id);
             // Update the products-api array
             this.products.products = this.products.products.map((t) =>
               t.id === product.id ? product : t

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, retry } from 'rxjs';
 import { ErrorResult } from '../dtos/local/base';
 import { LoginRequestDto } from '../dtos/requests/login.dto';
-import { buildError, buildErrorObservable } from './utils/net.utils';
+import { buildError, buildErrorObservable } from '../utils/net.utils';
 import { LoginDtoResponse } from '../dtos/responses/users/auth.dto';
 import { User } from '../models/user';
 import { LocalstorageServicesService } from './localstorage-services.service';
@@ -16,6 +16,7 @@ const httpOptions = {
 };
 
 let CREATED = false;
+const USER_KEY = 'auth_user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,16 +24,24 @@ let CREATED = false;
 export class AuthService {
   readonly api = 'http://localhost:3000/api/v1/user';
 
-  isLoggedIn: boolean | undefined;
-  private cachedUser!: User;
-  USER_KEY = 'auth_user';
-  user = new BehaviorSubject<User>(this.cachedUser);
+  isLoggedIn: boolean;
+  private cachedUser: User;
+  private user: BehaviorSubject<User>;
 
   constructor(
     private http: HttpClient,
     private notificationS: NotificationService,
     private localstorageS: LocalstorageServicesService
-  ) {}
+  ) {
+    if (CREATED) {
+      alert('Two instances of the same UsersService');
+      return;
+    }
+    CREATED = true;
+    this.cachedUser = this.getUserSync();
+    this.isLoggedIn = !!this.cachedUser;
+    this.user = new BehaviorSubject(this.cachedUser);
+  }
 
   signUp(userInfo: Object): Observable<any> {
     return this.http.post<any>(`${this.api}/register`, userInfo, httpOptions);
@@ -74,7 +83,6 @@ export class AuthService {
   }
 
   isLoggedInSync(): boolean {
-    // return this.cachedUser != null && this.cachedUser.username !== null;
     return (
       this.user.getValue() != null && this.user.getValue().username !== null
     );
@@ -106,22 +114,37 @@ export class AuthService {
           return false;
         }
         const rolesIntersection = user.roles.name.includes('admin');
+        // const rolesIntersection = user.roles.name.filter(
+        //   (role) => -1 !== ['ADMIN'.toLowerCase()].indexOf(role)
+        // );
         return rolesIntersection;
-        //const rolesIntersection = user.roles.name.((role) => -1 !== ['admin'].indexOf(role));
-        //return rolesIntersection.length >= 1;
       })
     );
   }
 
+  // isAdminAsync(): Observable<boolean> {
+  //   return this.user.pipe(
+  //     map((user) => {
+  //       if (user == null) {
+  //         return false;
+  //       }
+  //       const rolesIntersection = user.roles.name.includes('admin');
+  //       return rolesIntersection;
+  //       //const rolesIntersection = user.roles.name.((role) => -1 !== ['admin'].indexOf(role));
+  //       //return rolesIntersection.length >= 1;
+  //     })
+  //   );
+  // }
+
   saveUser(user: User) {
-    this.localstorageS.clear(this.USER_KEY);
+    this.localstorageS.clear(USER_KEY);
     this.cachedUser = user;
-    this.localstorageS.set(this.USER_KEY, JSON.stringify(user));
+    this.localstorageS.set(USER_KEY, JSON.stringify(user));
     this.user.next(user);
   }
 
   private getUserSync(): User | any {
-    const user = this.localstorageS.get(this.USER_KEY);
+    const user = this.localstorageS.get(USER_KEY);
     if (user) {
       return JSON.parse(user) as User;
     }
@@ -133,14 +156,19 @@ export class AuthService {
   }
 
   signOut() {
-    this.localstorageS.clear(this.USER_KEY);
-    //this.user.next(); // a revoir
+    this.localstorageS.clear(USER_KEY);
+    this.user.unsubscribe(); // this.user.next(null);
   }
 
-  public getRolesSync(): string[] {
-    const roles: any = [];
-    if (this.localstorageS.get(this.USER_KEY)) {
-      JSON.stringify(sessionStorage.getItem(this.USER_KEY));
+  getRolesSync(): string[] {
+    const roles: any[] = [];
+    if (this.localstorageS.get(USER_KEY)) {
+      const item = localStorage.getItem(USER_KEY);
+      return item
+        ? JSON.parse(item).roles.forEach((role: any) => {
+            roles.push(role);
+          })
+        : [];
     }
     return roles;
   }

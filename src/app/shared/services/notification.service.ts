@@ -18,7 +18,7 @@ export class NotificationService {
     CREATED = true;
     this.messages = new BehaviorSubject<any>(null);
   }
-  private messages!: BehaviorSubject<NotificationsDto>;
+  private messages: BehaviorSubject<NotificationsDto>;
 
   getNotifications(): Observable<NotificationsDto> {
     return this.messages.asObservable();
