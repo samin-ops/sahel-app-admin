@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   message: string;
   cartItemsLength: number;
   isLoggedIn = false;
-  subscriptions: Subscription[];
+  private subscriptions: Subscription[] = [];
   className: string;
 
   constructor(
