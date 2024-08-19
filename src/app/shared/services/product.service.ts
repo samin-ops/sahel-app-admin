@@ -116,7 +116,7 @@ export class ProductService {
     this.productsBehaviourSubject.next(this.products);
   }
 
-  getById(id: string): Observable<ProductDto> {
+  getById(id: number): Observable<ProductDto> {
     return this.http.get<ProductDto>(`${this.api}/by_id/${id}`);
   }
 

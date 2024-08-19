@@ -28,7 +28,6 @@ import { CommentSubmittedResponse } from 'src/app/shared/dtos/responses/comments
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   product: Product;
-
   isLoggedIn: boolean = false;
   private subscriptions: Subscription[] = [];
   commentForm: FormGroup;
@@ -38,7 +37,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private productS: ProductService,
+    private productS: ProductService, //
     private userservice: AuthService,
     private notificationS: NotificationService,
     private shoppingS: ShoppingCartServiceService,
@@ -48,7 +47,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.userservice.getUser().subscribe((user) => {
         this.currentUser = user;
-        this.isLoggedIn = !!user;
+        this.isLoggedIn = !user;
       })
     );
 
@@ -124,7 +123,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     if (this.commentForm.valid) {
       this.notificationS.dispatchSuccessMessage('Submitting Login Form');
       const { content } = this.commentForm.value;
-      const comment = new Comment({
+      const comment: any = new Comment({
         productId: this.product.id,
         content: content,
         id: null,

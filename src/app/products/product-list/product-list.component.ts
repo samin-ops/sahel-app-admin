@@ -53,7 +53,7 @@ export class ProductListComponent implements OnInit {
 
   addOrUpdateCart(product: Product) {}
 
-  edit(id: string) {
+  edit(id: number) {
     this.productS.getById(id).subscribe((product) => {
       console.log(product);
     });

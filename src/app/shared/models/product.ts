@@ -1,5 +1,6 @@
 import { Category } from './category.model';
 import { Tag } from './tag.model';
+import { Comment } from './comment.model';
 
 export class Product {
   constructor(params: any = {}) {

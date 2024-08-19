@@ -62,15 +62,15 @@
 <br />
 
 <div class="container text-center">
-  <h4 *ngIf="!!product.comments">Comments</h4>
-  <div *ngFor="let comment of product?.comments">
-    <b>{{ comment.user?.username }}</b>
-    <p>{{ comment.content }}</p>
+  <h4 *ngIf="!product.comments">Comments</h4>
+  <div *ngFor="let c of product.comments">
+    <b>{{ c.user?.username }}</b>
+    <p>{{ c.content }}</p>
     <i
       class="fa fa-trash"
       aria-hidden="true"
-      *ngIf="comment.user.username === currentUser?.username"
-      (click)="oNdeleteComment(comment)"
+      *ngIf="c.user?.username === currentUser?.username"
+      (click)="oNdeleteComment(c)"
     ></i>
   </div>
 </div>
