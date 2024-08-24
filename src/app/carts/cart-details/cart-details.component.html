@@ -1,1 +1,5 @@
-<p>cart-details works!</p>
+<a class="btn btn-primary col-sm" [routerLink]="['/products/']"
+  >Continue Shipping</a
+>
+<a class="btn col-sm" [routerLink]="['/orders/create']">Checkout</a>
+<a class="btn btn-danger col-sm" (click)="clearCart()">Clear cart</a>
