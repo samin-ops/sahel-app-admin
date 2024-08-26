@@ -109,7 +109,7 @@ export class ProductService {
     }
 
     // always return the behaviourSubject, this guy will notify the observers for any update
-    return this.productsBehaviourSubject.asObservable();
+    return this.productsBehaviourSubject.asObservable();// a revoir 
   }
 
   private notifyDataChanged() {
@@ -250,16 +250,15 @@ export class ProductService {
     return this.http
       .delete<BaseAppDtoResponse>(`${this.api}comment/${id}`)
       .pipe(
-        map(
-          (res) => {
+        map((res) => {
             this.notificationService.dispatchSuccessMessage('Comment deleted');
             return res;
-          },
+          }),
           catchError((err) => {
             this.notificationService.dispatchErrorMessage(err);
             return buildErrorObservable(err);
           })
         )
-      );
+      
   }
 }
