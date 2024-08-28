@@ -1,58 +1,74 @@
+
+
 <div
   class="container-wrapper container d-flex justify-content-center align-items-center"
 >
-  <div class="form-wrapper text-center">
+  <div class="form-wrapper text-center ">
     <h2 class="text-center">Register</h2>
-    <form [formGroup]="signupForm" (submit)="onSubmit()" novalidate>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="name-wrapper d-flex">
-        <div class="form-group first-name">
+        <div class="mx-2">
           <input
-            type="text"
-            class="form-control"
-            id="first-name-input"
+            type="firstName"
             placeholder="First Name"
             formControlName="firstName"
+            class="form-control"
           />
         </div>
-        <div class="form-group last-name">
+        <div class="mb-3" >
           <input
-            type="text"
-            class="form-control"
-            id="last-name-input"
+            type="lastName"
             placeholder="Last Name"
             formControlName="lastName"
+            class="form-control"
           />
         </div>
       </div>
-      <div class="form-group">
+
+      <div class="mb-3">
         <input
-          type="text"
-          class="form-control"
-          id="username"
+          type="username"
           placeholder="Enter Username"
           formControlName="username"
+          class="form-control"
         />
       </div>
-      <div class="form-group">
+      <div class="mb-3" >
         <input
           type="email"
           class="form-control"
-          id="email-input"
           placeholder="Enter Email"
           formControlName="email"
         />
       </div>
-      <div class="form-group">
+      <div class="mb-3">
+        <input
+          type="phone"
+          id="phone"
+          placeholder="phone number"
+          formControlName="phone"
+          class="form-control"
+        />
+      </div>
+      
+      <div class="mb-3">
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
         <input
           type="password"
           class="form-control"
-          id="password-input"
-          placeholder="Password"
-          formControlName="password"
+          placeholder="Confirm password"
+          formControlName="password_confirmation"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Register</button>
+      <a [routerLink]="'/auth/login'">Already have an Account?</a>
     </form>
-    <small><a routerLink="/auth/login">Already have an Account?</a></small>
   </div>
 </div>

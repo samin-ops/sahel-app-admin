@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
@@ -26,7 +26,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private usersService: AuthService,
     public cartService: ShoppingCartServiceService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router : Router
   ) {
     this.cart = this.cartService.getCart();
     this.subscriptions.push(

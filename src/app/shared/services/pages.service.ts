@@ -20,7 +20,7 @@ export class PagesService {
   }
 
   fetchHome(): Observable<HomeResponseDto | ErrorResult> {
-    return this.httpClient.get<HomeResponseDto>(this.api).pipe(
+    return this.httpClient.get<HomeResponseDto>(`${this.api}/home`).pipe(
       map((res) => {
         if (res.success) {
           console.log('[+] Fetched home successfully');

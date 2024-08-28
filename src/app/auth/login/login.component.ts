@@ -29,8 +29,8 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  private user!: User;
-  public loginForm!: FormGroup;
+  private user: User;
+  public loginForm: FormGroup;
   returnUrl!: string;
 
   constructor(
@@ -42,16 +42,16 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-    this.usersService.getUser().subscribe((user) => {
-      this.user = user;
-      if (!user) {
-        this.router.navigateByUrl('/home');
-      }
-    });
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    // this.usersService.getUser().subscribe((user) => {
+    //   this.user = user;
+    //   if (!user) {
+    //     this.router.navigateByUrl('/home');
+    //   }
+    // });
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required /* Validators.email*/]],
-      password: ['', [Validators.required /*Validators.minLength(8) */]],
+      username:this.fb.control('', Validators.required),
+      password: this.fb.control('', Validators.required),
     });
   }
 
@@ -70,5 +70,15 @@ export class LoginComponent implements OnInit {
     } else {
       this.notificationService.dispatchErrorMessage('Invalid form');
     }
+  }
+
+  getUser(){
+    this.usersService.getUser().subscribe((user) => {
+      this.user = user;
+      if (!user) {
+        this.router.navigateByUrl('/home');
+      }
+    });
+
   }
 }

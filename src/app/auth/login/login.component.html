@@ -3,7 +3,7 @@
 >
   <div class="form-wrapper text-center col-sm-4">
     <h2 class="text-center">Login</h2>
-    <form [formGroup]="loginForm" (submit)="submit()" novalidate>
+    <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
       <div class="form-group">
         <input
           type="text"
@@ -22,8 +22,8 @@
           formControlName="password"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Submit</button>
     </form>
-    <small><a routerLink="/auth/register">Need an Account?</a></small>
+    <small><a [routerLink]="'/auth/register'">Need an Account?</a></small>
   </div>
 </section>

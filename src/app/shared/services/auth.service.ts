@@ -8,6 +8,7 @@ import { LoginDtoResponse } from '../dtos/responses/users/auth.dto';
 import { User } from '../models/user';
 import { LocalstorageServicesService } from './localstorage-services.service';
 import { NotificationService } from './notification.service';
+import { RegisterDto } from '../dtos/requests/register.dto';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -43,10 +44,6 @@ export class AuthService {
     this.user = new BehaviorSubject(this.cachedUser);
   }
 
-  signUp(userInfo: Object): Observable<any> {
-    return this.http.post<any>(`${this.api}/register`, userInfo, httpOptions);
-  }
-
   login(credential: LoginRequestDto): Observable<User | ErrorResult> {
     return this.http
       .post<LoginDtoResponse>(`${this.api}/login`, credential, httpOptions)
@@ -78,6 +75,13 @@ export class AuthService {
         })
       );
   }
+
+  register(userInfo: RegisterDto): Observable<any>{
+    return this.http.post(`${this.api}/register`, userInfo, httpOptions)
+      
+  }
+
+  
   logout() {
     this.clearUser();
   }
@@ -100,7 +104,7 @@ export class AuthService {
   }
 
   isAdminSync(): boolean {
-    return this.user.getValue().roles.name.indexOf('admin') !== -1;
+    return this.user.getValue().roles.name.indexOf('ROLES_Admin') !== -1;
   }
 
   getUser(): Observable<User> {
