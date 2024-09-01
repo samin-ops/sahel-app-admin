@@ -14,7 +14,6 @@
       </div>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-9">
       <div class="container">
@@ -94,8 +93,7 @@
         </div>
         <!-- Pagination -->
         <div class="text-center mt-3">
-          [pageMeta]="(products | async)?.page_meta"
-          (loadMore)="onLoadMore($event)"
+          <app-pagination [pageMeta]="(products|async)?.page_meta" (loadMore)="onLoadMore($event)"></app-pagination>
         </div>
       </div>
       <!--/.Card-->

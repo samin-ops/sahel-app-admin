@@ -18,7 +18,7 @@ export class User {
   password: string;
   password_confirmation: string;
   email: string;
-  roles: Role;
+  roles: string[];
   address!: string;
   address2!: string;
   country!: string;
@@ -40,8 +40,4 @@ export class UserDetail {
   zip: number;
 }
 
-export class Role {
-  id: number;
-  name: string;
-  description: string;
-}
+

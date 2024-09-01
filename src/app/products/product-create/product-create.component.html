@@ -1,63 +1,78 @@
 <div class="container">
   <h1 class="text-center">Ajouter un produit</h1>
-  <form class="row g-3" [formGroup]="productForm" (submit)="submitForm()">
+  <form class="row g-3" [formGroup]="productForm" (ngSubmit)="submitForm()">
     <div class="col-md-6">
       <label class="form-label" for="name">Nom du produit</label>
       <input
-        class="form-control"
-        placeholder="Entrer le nom du produit"
-        type="text"
-        name="name"
-        id="name"
-        formControlName="name"
+      placeholder="Entrer le nom du produit"
+      type="text"
+      name="name"
+      id="name"
+      autocomplete="given-name"
+      formControlName="name"
+      class="form-control"
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" for="slug">Slug</label>
+      <input
+      placeholder="Entrer le slug du produit"
+      type="text"
+      name="slug"
+      id="slug"
+      autocomplete="off"
+      formControlName="slug"
+      class="form-control"
       />
     </div>
     <div class="col-md-6">
       <label class="form-label" for="description">Description</label>
       <textarea
-        class="form-control"
-        type="description"
-        name="description"
-        id="description"
-        formControlName="description"
+      type="text"
+      name="description"
+      id="description"
+      autocomplete="off"
+      formControlName="description"
+      class="form-control"
       ></textarea>
     </div>
     <div class="col-md-4">
       <label class="form-label" for="price">Prix</label>
       <input
-        class="form-control"
-        type="number"
-        name="price"
-        id="price"
-        placeholder="1"
-        step="1"
-        formControlName="price"
+      type="number"
+      name="price"
+      id="price"
+      autocomplete="off"
+      placeholder="1"
+      step="1"
+      formControlName="price"
+      class="form-control"
       />
     </div>
-
     <div class="col-md-4">
-      <label class="form-label" for="stock">Stock</label>
+      <label class="form-label">Stock</label>
       <input
-        class="form-control"
-        type="number"
-        name="stock"
-        id="stock"
-        placeholder="1"
-        step="1"
-        formControlName="stock"
+      type="number"
+      name="stock"
+      id="stock"
+      autocomplete="off"
+      placeholder="1"
+      step="1"
+      formControlName="stock"
+      class="form-control"
       />
     </div>
     <input
-      id="p_files"
       name="p_files"
       type="file"
+      id="p_files"
       (change)="addFiles($event)"
       placeholder="Product Images"
       multiple
     />
     <hr class="mb-3" />
     <div class="col-md-12">
-      <button class="btn btn-primary" type="submit">Envoyer</button>
+      <button class="btn btn-primary" type="submit" [disabled]="productForm.invalid">Ajouter</button>
     </div>
   </form>
 </div>

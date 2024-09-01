@@ -104,7 +104,7 @@ export class AuthService {
   }
 
   isAdminSync(): boolean {
-    return this.user.getValue().roles.name.indexOf('ROLES_Admin') !== -1;
+    return this.user.getValue().roles.indexOf('ROLES_ADMIN') !== -1;
   }
 
   getUser(): Observable<User> {
@@ -117,7 +117,7 @@ export class AuthService {
         if (user == null) {
           return false;
         }
-        const rolesIntersection = user.roles.name.includes('admin');
+        const rolesIntersection = user.roles.includes('ROLES_ADMIN');
         // const rolesIntersection = user.roles.name.filter(
         //   (role) => -1 !== ['ADMIN'.toLowerCase()].indexOf(role)
         // );

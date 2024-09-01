@@ -31,7 +31,7 @@ const httpOptions = {
 export class ProductService {
   private productList: Product[];
   products: ProductListResponseDto;
-  readonly api = 'http://localhost:3000/api/v1/user';
+  readonly api = 'http://localhost:3000/api/v1/product';
 
   cartSnapshot: ShoppingCart;
   productsBehaviourSubject: BehaviorSubject<ProductListResponseDto>;
@@ -147,22 +147,16 @@ export class ProductService {
     );
   }
 
-  createProduct(
-    product: Product,
-    images: FileList
-  ): Observable<ProductDto | ErrorResult> {
+  createProduct(product: Product, images: FileList): Observable<ProductDto | ErrorResult> {
     const formData = new FormData();
-
     for (let i = 0; i < images.length; i++) {
       formData.append('images[]', images[i], images[i]['name']);
     }
-
     formData.append('name', product.name);
     formData.append('description', product.description);
     formData.append('stock', product.stock.toString());
     formData.append('price', product.price.toString());
-
-    return this.http.post<ProductDto | ErrorResult>(this.api, formData).pipe(
+    return this.http.post<ProductDto | ErrorResult>(`${this.api}/`, formData).pipe(
       map((res) => {
         res.success;
         this.notificationService.dispatchSuccessMessage(

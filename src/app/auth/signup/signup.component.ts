@@ -36,7 +36,10 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private notificationS: NotificationService
   ) {}
-
+    Role= {
+      name:'ROLES_Admin',
+      description:'admin'
+    }
   ngOnInit() {
     this.registerForm = this.fb.group({
       firstName: this.fb.control('',Validators.required),
@@ -46,7 +49,7 @@ export class SignupComponent implements OnInit {
       phone: this.fb.control('',Validators.required),
       password:this.fb.control('',Validators.required),
       password_confirmation:this.fb.control('',Validators.required),
-     // roles: this.fb.control('', Validators.required)
+    roles: this.fb.control(this.Role.name, Validators.required)
     });
   }
 

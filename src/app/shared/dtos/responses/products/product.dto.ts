@@ -8,7 +8,7 @@ export class ProductDto extends BaseAppDtoResponse {
   // product: Product;
   // authInfo: AuthInfo;
 
-  id: string;
+  id: number;
   name: string;
   slug: string;
   description: string;

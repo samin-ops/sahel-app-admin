@@ -9,16 +9,17 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { PaginationRequestDto } from 'src/app/shared/dtos/requests/base.dto';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationComponent } from 'src/app/shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, PaginationComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products: Observable<ProductListResponseDto> | any;
+  products: Observable<ProductListResponseDto | any> ;
   productList!: Product[];
   categories!: Category[];
   selectedCategory!: string;
@@ -40,6 +41,7 @@ export class ProductListComponent implements OnInit {
     this.products.subscribe((res: any) => {
       if (res && res.success) {
         if (res.products) {
+          
           this.productList = res.products;
         }
         if (res.categories) {

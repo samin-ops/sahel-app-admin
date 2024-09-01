@@ -39,6 +39,7 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit() {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
+      slug: ['', [Validators.required, Validators.minLength(4)]],
       price: [1, [Validators.required, Validators.min(1)]],
       stock: [1, [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
@@ -53,20 +54,24 @@ export class ProductCreateComponent implements OnInit {
     this.images = <FileList>e.target.files;
   }
   submitForm() {
-    const productInfo = this.productForm.value as Product;
-    productInfo.description = this.description;
-
-    this.productS.createProduct(productInfo, this.images).subscribe(
-      (data) => {
-        if (data && data.success) {
-          this.router.navigate(['/', 'products', (data as ProductDto).id]);
-        } else {
-          this.router.navigate(['/', 'products']);
+    const productInfo = this.productForm.value
+    this.productS.createProduct(productInfo, this.images).subscribe({
+      next: data =>{
+        if(data && data.success){
+          console.log(data);
+          
+          this.router.navigateByUrl("/product/list")
+        }else{
+          this.router.navigateByUrl("/product/create")
         }
       },
-      (err) => {
+      error: err => {
         console.log(err);
+        
       }
-    );
+    })
+      
+    
+      
   }
 }
